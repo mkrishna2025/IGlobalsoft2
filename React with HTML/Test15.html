@@ -47,10 +47,9 @@
 						password: this.state.password
 					}
 					alert(JSON.stringify(json));
-				} else {
-					this.setState( { errorUserName : errorMessageForUserName, errorPassword: errorMessageForPassword, errorMessages: messages });
-				}
-				
+				} 
+
+				this.setState( { errorUserName : errorMessageForUserName, errorPassword: errorMessageForPassword, errorMessages: messages });
 				
 			}
 			render(){
