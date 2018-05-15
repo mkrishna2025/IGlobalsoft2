@@ -1,0 +1,57 @@
+promise - true/false
+
+1
+2
+3 - 10 mins - Collect Money 
+4 - 20 mins - COllect and deposit to bank
+5
+6
+
+TakeHelp({ event: 'CollectMoney', amount: 100000 }).then(callBack).catch(callBack)
+
+TakeHelp({event: 'CollectAndDeposit', amount: 1000}).then(callBack).then(callBack).catch(callBack)
+
+fetch(url, options).then(callBack).catch(callBack);
+
+
+var data = new FormData();
+data.append('username', this.state.reg_email);
+data.append('password', this.state.reg_password);
+
+// Get Request
+fetch('http://trainingkit.azurewebsites.net/api/Users/GetAttendees')
+.then(response => {
+	return response.json();
+})
+.then(responseJson => {
+	if(responseJson.success){
+		//this.setState( { attendees: responseJson.data }) ;
+		setTimeout(function() { this.setState( { attendees: responseJson.data, loading: false, tableDisplay: '' }); }.bind(this), 3000);
+	}
+})
+.catch( exception => {
+	debugger;
+})
+
+// Post Request
+fetch('http://trainingkit.azurewebsites.net/api/Users/CreateUser', {
+	method: 'POST',
+	body: data
+})
+.then(response => {
+	if(response.status == 200){
+		return response.json();
+	} else {
+		alert('User Creation Failed');
+	}
+})
+.then(responseJson => {
+	if(responseJson.success && responseJson.data){
+		alert('User Created Successfully');
+	} else {
+		alert('User Creation Failed');
+	}
+})
+.catch(exception =>{
+	debugger;
+});

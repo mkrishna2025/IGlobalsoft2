@@ -30,7 +30,84 @@ R1/S2 => F9
 React Router
 	React Router DOM
 	React Router Native
-	
+
+class MasterPage {
+	render() {
+		return <div>
+			<Header />
+				{this.props.children}
+			<Footer />
+			</div>;
+	}
+}
 
 
+class MasterPage {
+	render() {
+		return <div>
+			<Header />
+				{React.Children.map(children, (child, i) => {
+				  // Ignore the first child
+				  if (i < 1) return
+				  return child
+				})}
+			<Footer />
+			</div>;
+	}
+}
+
+
+class BrowserHistory {
+	constructor(props){
+		this.state = {
+			history: new HistoryObject()
+		}
+	}
+	render(){
+		return (
+			<div>
+				{
+					React.Children.map(this.props.children, child => {
+						return React.cloneElement(child, {
+						  history: this.state.history
+						})
+					})
+				}
+			</div>
+		);
+	}
+}
+
+this.props.history.push('home');
+https://github.com/mkrishna2025/Routing
+
+<a href=''></a>
+
+<Link to=""></Link>
  
+ 
+<Route path="/r1" component ={A} isMasterPage/>
+
+class Route extends React.Component {
+	const { path, component, isMasterPage, render } = this.props;
+	var componentProps = { history: { params: } };
+	render() {
+		return render(componentProps);
+	}
+}
+
+<Route path="/r1" isMasterPage render=(props) => <A {...props} /> 
+
+<Route path="/r1" render=(props) => <MasterPage><A {...props} /><MasterPage/>
+
+<Route path="/r1" render=(props) => {
+	if(session.get('isAuthenticated') == true) {
+		return <Redirect to="Login" />
+	} else {
+		return <MasterPage><A {...props} /><MasterPage/>
+	}
+}
+
+
+
+
